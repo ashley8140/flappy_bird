@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>flappy bird</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <!-- 删除默认的苹果工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 控制状态栏显示样式 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!--向搜索引擎说明你的网页的关键词 -->
+    <meta name="keywords" content="flappy bird" />
+    <!-- 告诉搜索引擎你的站点的主要内容 -->
+    <meta name="description" content="快来玩一局flappy bird吧" />
+    <!-- 去掉winphone系统a、input标签被点击时产生的半透明灰色背景 -->
+    <meta name="msapplication-tap-highlight" content="no">
+</head>
+
+<body class="app">
+    <div id="stars_box">
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
+    </div>
+    <div class="game_box">
+        <!-- 声效 -->
+        <header class="header">
+            <a href="javascript:void(0)" id="u-globalAudio" class="close">
+                <span class="audioControl">音效开</span>
+                <audio id="wing" src="/static/media/sfx_wing.mp3"></audio>
+                <audio id="swooshing" src="/static/media/sfx_swooshing.mp3"></audio>
+                <audio id="die" src="/static/media/sfx_die.mp3"></audio>
+                <audio id="hit" src="/static/media/sfx_hit.mp3"></audio>
+                <audio id="point" src="/static/media/sfx_point.mp3"></audio>
+            </a>
+        </header>
+        <!-- 首页动画 -->
+        <section class="first_page">
+            <ul class="begin_animation">
+                <li>
+                    <img src="/static/img/begin1.jpg">
+                </li>
+                <li>
+                    <img src="/static/img/begin2.jpg">
+                </li>
+                <li>
+                    <img src="/static/img/begin3.jpg">
+                </li>
+            </ul>
+        </section>
+        <!-- 画布 -->
+        <canvas id="canvas"></canvas>
+        <!-- 选项 -->
+        <div id="controls">
+            <p id="game_over" class="">Game over!</p>
+            <div class="buttons">
+                <div id="startButton" class="">Start</div>
+                <div id="mode" class="">Mode</div>
+            </div>
+            <div class="loadingContainer">
+                <p id="loadingSpan" class="">Loading...</p>
+                <p id="percent" class="">0%</p>
+                <div id="progressbarDiv"></div>
+            </div>
+            <div class="modeContainer">
+                <ul>
+                    <li>
+                        <label>
+                            <input name="mode" type="radio" checked value="easy">
+                            <span class="radio">esay
+                                <i></i>
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input name="mode" type="radio" value="normal">
+                            <span class="radio">normal
+                                <i></i>
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input name="mode" type="radio" value="hard">
+                            <span class="radio">hard
+                                <i></i>
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <span id="ok" class="ok"> ok </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+.game_box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    min-width: 320px;
+    max-height: 736px;
+}
+
+#stars_box {
+    position: absolute;
+}
+
+#canvas {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.text {
+    vertical-align: super;
+}
+
+#prompt {
+    position: absolute;
+    left: 450px;
+    top: 50px;
+}
+
+#prompt h1 {
+    color: red;
+}
+
+.center {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+/* 用visibility的原因是防止重排 */
+
+.buttons {
+    visibility: hidden;
+    margin-top: 20px;
+}
+
+#startButton,
+#mode {
+    float: left;
+    width: 40%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: rgb(171, 201, 62);
+    box-shadow: 5px 5px 5px #888888;
+}
+
+#mode {
+    float: right;
+}
+
+.loadingContainer {
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    text-align: center;
+}
+
+#loadingSpan {
+    font-size: 2rem;
+    top: 40%;
+}
+
+#percent {
+    font-size: 1rem;
+    top: 45%;
+    font-weight: bold;
+}
+
+.first_page {
+    background: #636b56;
+    height: 100%;
+    transition: opacity 1s linear;
+}
+
+.none {
+    opacity: 0;
+}
+
+.begin_animation {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.begin_animation li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform-style: preserve-3d;
+}
+
+.begin_animation li img {
+    position: absolute;
+    width: 80%;
+    left: 50%;
+    border-radius: 2px;
+    box-shadow: 0 0 15px 0 #B8B8B8;
+    -webkit-transition: all .8s ease-out;
+    -webkit-transform: rotateZ(3deg) scale(3) translate3d(80%, 80%, 0);
+    -webkit-backface-visibility: hidden;
+}
+
+.begin_animation.z-viewArea li:nth-child(1) img {
+    -webkit-transform: rotateZ(-3deg) scale(1) translate3d(-50%, 5%, 0);
+    -webkit-transition-delay: 0s;
+}
+
+.begin_animation.z-viewArea li:nth-child(2) img {
+    -webkit-transform: rotateZ(5deg) scale(1) translate3d(-50%, 90%, 0);
+    -webkit-transition-delay: 0.5s;
+}
+
+.begin_animation.z-viewArea li:nth-child(3) img {
+    -webkit-transform: rotateZ(-3deg) scale(1) translate3d(-50%, 150%, 0);
+    -webkit-transition-delay: 1s;
+}
+
+#controls {
+    position: absolute;
+    height: 200px;
+    width: 80%;
+    left: 10%;
+    top: 30%;
+}
+
+#game_over {
+    visibility: hidden;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modeContainer {
+    visibility: hidden;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    font-size: 28px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: rgb(171, 201, 62);
+    box-shadow: 5px 5px 5px #888888;
+}
+
+.modeContainer input[type=radio] {
+    display: none;
+}
+
+.modeContainer span {
+    position: relative;
+    display: inline-block;
+    width: 170px;
+}
+
+.modeContainer input[type=radio]:checked+.radio i:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    content: '\2713';
+    color: #1013f5;
+    font-weight: bolder;
+}
+
+.modeContainer .ok {
+    border-radius: 8px;
+    background: #636b56;
+    color: #fff;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+#u-globalAudio {
+    display: none;
+    position: absolute;
+    right: 10px;
+}
+
+#u-globalAudio .audioControl {
+    display: block;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #000;
+}
+
+@media(min-width: 414px) {
+    .game_box {
+        margin-top: 50px;
+        width: 414px;
+        height: 736px;
+    }
+}
