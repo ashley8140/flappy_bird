@@ -75,12 +75,12 @@
 }
 
 #loadingSpan {
-    font-size: 2rem;
+    font-size: 28px;
     top: 40%;
 }
 
 #percent {
-    font-size: 1rem;
+    font-size: 20px;
     top: 45%;
     font-weight: bold;
 }

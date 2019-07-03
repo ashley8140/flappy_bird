@@ -1,5 +1,5 @@
-let appWidth = document.querySelector('.game_box').clientWidth;
-let appHeight = document.querySelector('.game_box').clientHeight;
+let appWidth = document.querySelector('.game_box').clientWidth
+let appHeight = document.querySelector('.game_box').clientHeight
 const config = {
     devicePixelRatio: window.devicePixelRatio || 1,
     point: 600,

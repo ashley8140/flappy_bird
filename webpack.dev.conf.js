@@ -1,6 +1,8 @@
 const path = require('path')
-const htmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -14,7 +16,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, './dist/'),
-        publicPath: '/static/flappy_bird',
+        publicPath: '/',
         filename: '[name].js'
     },
     resolve: {
@@ -48,49 +50,85 @@ module.exports = {
                         }
                     ]
                 }),
-            }, {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')]
+            }, 
+            {
+                test: /\.m?js$/,
+                exclude: /^node_modules$/,
+                include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')],
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: 'img/[name].[hash:7].[ext]'
-                }
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name: 'image/[name].[hash:7].[ext]'
+                    }
+                }],
             },
             {
                 test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: 'media/[name].[hash:7].[ext]'
-                }
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name: 'media/[name].[hash:7].[ext]'
+                    }
+                }]
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: 'fonts/[name].[hash:7].[ext]'
-                }
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name: 'fonts/[name].[hash:7].[ext]'
+                    }
+                }]
             },
-      /*       {
-                test: /\.html$/,
-                loader: 'html-loader'
-            } */
         ]
     },
     plugins: [
-        new htmlWebpackPlugin({
-            template: './index.html',
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            filename: 'index.html',
+            inject: true
         }),
-        new ExtractTextPlugin('[name].css')
+        new ExtractTextPlugin('[name].css'),
+        //copy custom static assets
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, './static'),
+            to: 'static',
+            ignore: ['.*']
+        }])
     ],
     devServer: {
-        contentBase: 'dist',
+        clientLogLevel: 'warning',
+        historyApiFallback: {
+            rewrites: [{
+                from: /.*/,
+                to: path.posix.join('/', 'index.html')
+            }, ],
+        },
+        hot: true,
+        contentBase: false, // since we use CopyWebpackPlugin.
+        compress: true,
+        overlay: {
+            warnings: false,
+            errors: true
+        },
+        publicPath: '/',
+        proxy: {},
+        quiet: true, // necessary for FriendlyErrorsPlugin
+        watchOptions: {
+            poll: false,
+        }
     },
     node: {
         // prevent webpack from injecting useless setImmediate polyfill because Vue
